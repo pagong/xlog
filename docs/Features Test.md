@@ -25,6 +25,7 @@ Computer science is the study of computation, automation, and information. Compu
 * Detect date `DD-MM-YYYY` : 1-January-2023
 * Detect hashtag using `#`: #Testing
 * Foot note Using `[^1]` [^1]
+* Automatic foot note for links with `[?]` [?](https://emadelsaid.com) another example [?](https://xlog.emadelsaid.com) and uses same index for same link [?](https://emadelsaid.com) 
 * Typography replacement: `'` 'hello', `"` "hello", `--` --, `...` ..., `<<` <<, `>>` >>
 * Inline [MathJax](https://www.mathjax.org/) with `$` :  $ax^2 + bx + c = 0$
 * Inline [MathJax](https://www.mathjax.org/) with `$$` :  $$ax^2 + bx + c = 0$$
