@@ -12,11 +12,11 @@ func init() {
 }
 
 var refReg = regexp.MustCompile(`(?iU)\s*\[\?\]\((?P<url>.+)\)`)
+var urlIndex = refReg.SubexpIndex("url")
 
 func extractFootnotes(in xlog.Markdown) xlog.Markdown {
 	linkSet := map[string]int{}
 	counter := 0
-	urlIndex := refReg.SubexpIndex("url")
 
 	out := refReg.ReplaceAllStringFunc(string(in), func(found string) string {
 		matches := refReg.FindStringSubmatch(found)
