@@ -42,6 +42,8 @@ type Photo struct {
 	Thumbnail string
 	Page      string
 	Original  string
+	Width     int
+	Height    int
 	Exif      *exif.Exif
 	Time      time.Time
 }
@@ -138,6 +140,10 @@ func (p *Photo) Lens() string {
 	return output
 }
 
+func (p *Photo) AspectRatio() float32 {
+	return float32(p.Width) / float32(p.Height)
+}
+
 func NewPhoto(path string) (*Photo, error) {
 	stat, err := os.Stat(path)
 	if err != nil {
@@ -160,10 +166,21 @@ func NewPhoto(path string) (*Photo, error) {
 		}
 	}
 
+	f.Seek(0, os.SEEK_SET)
+	img, _, err := image.Decode(f)
+	width, height := 0, 0
+	if err == nil {
+		max := img.Bounds().Max
+		width = max.X
+		height = max.Y
+	}
+
 	return &Photo{
 		Thumbnail: "/+/photos/thumbnail/" + path,
 		Page:      "/+/photos/photo/" + path,
 		Original:  path,
+		Width:     width,
+		Height:    height,
 		Exif:      exifData,
 		Time:      t,
 	}, nil
